@@ -61,6 +61,8 @@
                 <div class="register-left">
                     <div class="register-in">
                         <img src="../static/styles/logov2.png" width="350px" height="auto">
+                        <!-- google translate language selection -->
+                        <div class="center" id="google_translate_element"></div>
                         <p>Mission: Time<br/>
                             Objective: To help you meet as many new people as possible and have time for quality conversations by skipping
                         the time it takes to memorize their contact information. 
@@ -139,7 +141,16 @@
                     // fadeOut complete. Remove the loading div
                     $( "#loadingDiv" ).show(); //makes page more lightweight 
                 });  
-            }
+            };
         </script>
+
+        <!-- google translate API -->
+        <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        <!-- responsive voice api (text to speech) -->
+        <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+        <!-- jquery -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <!-- local javascript -->
+        <script src="../static/index.js"></script>
     </body>
 </html>

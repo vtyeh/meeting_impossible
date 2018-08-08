@@ -60,7 +60,9 @@
         <div class="register-full">
             <div class="register-left">
                 <div class="register-in">
-                    <h1>Welcome back, agent.</h1>
+                    <h1 style="height: 10px;">Welcome back, agent.</h1>
+                    <!-- google translate language selection -->
+                    <div class="center" id="google_translate_element"></div>
                     <h4>Please upload a photo of your new acquaintance: </h4>
                     <form method = "POST" enctype="multipart/form-data">
                       <input type="file" name="file" id="fileButton">
@@ -108,6 +110,15 @@
           });  
         }
     </script>
+
+    <!-- google translate API -->
+    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- responsive voice api (text to speech) -->
+    <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- local javascript -->
+    <script src="../static/index.js"></script>
 
   </body>
 </html>

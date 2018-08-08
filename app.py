@@ -115,6 +115,14 @@ def sign_up():
         data = new_entry.to_dict(orient='records')
         db_cm.insert(data)
 
+        try: 
+            # Retrain model with new users
+            print("Training KNN classifier...")
+            train("static/train_test/train", model_save_path="static/models/trained_knn_model.clf", n_neighbors=None)
+            print("Training complete!")
+        except:
+            print("Oh no, unable to train model.")
+
         status="Agent assignment complete."
         return render_template("index.html", form=form, status=status)
     else:
@@ -168,14 +176,6 @@ def upload_image():
     return render_template("search.html", user=None)
 
 def acquaintence_identification(uploaded_file):
-
-    try: 
-        # Retrain model with new users
-        print("Training KNN classifier...")
-        train("static/train_test/train", model_save_path="static/models/trained_knn_model.clf", n_neighbors=None)
-        print("Training complete!")
-    except:
-        return render_template("search.html", status="Oops, no one is in here. Be the first to sign up! (:")
 
     print("Looking for faces in {}".format(uploaded_file))
 
