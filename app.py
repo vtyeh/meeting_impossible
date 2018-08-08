@@ -1,5 +1,4 @@
 # Import Dependencies for Flask and MongoDB
-from __future__ import division, print_function
 import os
 import pandas as pd
 import random
@@ -8,6 +7,7 @@ from flask import render_template, request, flash, redirect, Flask
 import pymongo
 from pymongo import MongoClient
 from flask_pymongo import PyMongo
+from config import DB_NAME, DB_HOST, DB_PORT, DB_USER, DB_PASS
 
 # Import Dependencies for Face Recognition
 import cv2
@@ -21,18 +21,12 @@ from forms import SignUp
 # Import Dependencies for Hate Speech Recognition
 from sklearn.feature_extraction.text import TfidfVectorizer
 from utils import tokenize  # tokenizer used when training TFIDF vectorizer
-import pickle
-from keras import backend as K
-import json
-import csv
-import numpy as np
 from deepmoji.sentence_tokenizer import SentenceTokenizer
 from deepmoji.model_def import deepmoji_emojis
 from deepmoji.global_variables import PRETRAINED_PATH, VOCAB_PATH
-
-# import glob
-import re
-import pdb
+import pickle
+import json
+import numpy as np
 
 # Allowed extensions for uploaded images
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -42,8 +36,12 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Connect to MongoDB
-mng_client = pymongo.MongoClient('localhost', 27017)
-db = mng_client['app']
+mng_client = pymongo.MongoClient(DB_HOST, DB_PORT)
+db = mng_client[DB_NAME]
+db.authenticate(DB_USER, DB_PASS)
+
+# mng_client = pymongo.MongoClient('localhost', 27017)
+# db = mng_client['app']
 
 # Create app
 app = Flask(__name__)
@@ -87,8 +85,6 @@ def sign_up():
     age = []
     description = []
     unique_id = []
-    # image = []
-    # face_encoding = []
 
     if request.method == "POST":
 
@@ -241,10 +237,11 @@ def my_form_post():
                 inx2 = int(result[3])
                 inx3 = int(result[4])
                 inx4 = int(result[5])
-                value = str(result[0])+'\n'+emo[inx1]+emo[inx2]+emo[inx3]+emo[inx4]
+                value = str(result[0])
+                emoji_result = emo[inx1]+emo[inx2]+emo[inx3]+emo[inx4]
                 print(value)
-                
-        return render_template('hatespeech.html', text=text, result=value,
+                  
+        return render_template('hatespeech.html', text=text, result=value, emoji_result=emoji_result,
                             pred_toxic=dict_preds['pred_toxic'],
                             pred_severe_toxic=dict_preds['pred_severe_toxic'],
                             pred_identity_hate=dict_preds['pred_identity_hate'],
@@ -254,6 +251,7 @@ def my_form_post():
     else:
         return render_template('hatespeech.html')
 
+# Add emojis based on models
 maxlen = 30
 
 emo = ['😂', '😒', '😩', '😭', '😍',
