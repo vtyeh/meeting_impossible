@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Meeting Impossible</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <!-- jQuery -->
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Abel|Comfortaa|Montserrat|Roboto|Roboto+Mono" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lekton|Orbitron|Rajdhani|Source+Code+Pro" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="../static/styles/style.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <!-- Loader -->
+        <div id="loadingDiv" class="text-center" style="display:none;">
+            <svg width='182px' height='182px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-ripple"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><g> <animate attributeName="opacity" dur="4s" repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1" values="1;1;0"></animate><circle cx="50" cy="50" r="40" stroke="#eeeeee" fill="none" stroke-width="2" stroke-linecap="round"><animate attributeName="r" dur="4s" repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1" values="0;22;44"></animate></circle></g><g><animate attributeName="opacity" dur="4s" repeatCount="indefinite" begin="2s" keyTimes="0;0.33;1" values="1;1;0"></animate><circle cx="50" cy="50" r="40" stroke="#eeeeee" fill="none" stroke-width="2" stroke-linecap="round"><animate attributeName="r" dur="4s" repeatCount="indefinite" begin="2s" keyTimes="0;0.33;1" values="0;22;44"></animate></circle></g></svg>
+            <p id="loadingText">Collecting your information...</p>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default" id="myNavbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapseBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                <a class="navbar-brand" href="#">Meeting Impossible</a>
+                </div>
+                <div class="collapse navbar-collapse" id="collapseBar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/headquarters">Find Acquaintance</a></li>
+                    <li><a href="/voice-text-voice">Voice Recognition</a></li>
+                    <!-- <li><a href="/">Sign Up</a></li> -->
+                    <li><a href="/hatespeech">Hate Speech Recognition</a></li>
+                    <li><a href="/">Sign Up</a></li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section class="register">
+            <div class="register-full">
+                <div class="register-left">
+                    <div class="register-in">
+                        <img src="../static/styles/logov2.png" width="350px" height="auto">
+                        <p>Mission: Time<br/>
+                            Objective: To help you meet as many new people as possible and have time for quality conversations by skipping
+                        the time it takes to memorize their contact information. 
+                        All you need to do is take a headshot of them, and
+                        then, come back to <a href="/headquarters">HQ</a> and upload the photo. 
+                        Their information will be displayed promptly for you. Good luck!</p>
+                        <img src="../static/styles/mascotv2.png" id="mascot">
+                    </div>
+                </div>
+                <div class="register-right">
+                    <div class="register-in">
+                        <h2>register here</h2>
+                        <div class="register-form">
+                            <form action="/" method="POST" enctype="multipart/form-data">
+                                <div class="fields-grid">
+                                    <div class="styled-input">
+                                        {{form.name()}}
+                                        <label>Full Name</label>
+                                        
+                                    </div>
+                                    <div class="styled-input">
+                                        {{form.phone()}}
+                                        <label>Phone</label>
+                                        
+                                    </div>
+                                    <div class="styled-input">
+                                        {{form.email()}}
+                                        <label>Email</label>
+                                        
+                                    </div>
+                                    <div class="styled-input">
+                                        {{form.occupation()}}
+                                        <label>Occupation</label>
+                                        
+                                    </div>
+                                    <div class="styled-input">
+                                        {{form.description()}}
+                                        <label>You in 3 Words (i.e. sweet but salty)</label>
+                                        
+                                    </div>
+                                    <div class="styled-input">
+                                        {{form.age()}}
+                                        <label>Age</label>
+                                        
+                                    </div>
+                                    <div class="styled-input">
+                                        {{form.unique_id()}}
+                                        <label>Unique ID (min. 6 numbers)</label>
+                                        
+                                    </div>  
+                                    <div class="styled-input">
+                                        <input type="file" name="file" class="file-input">
+                                        <label class="label-special">Upload a clear headshot of yourself</label>
+                                    </div>  
+                                <p class="text-center"><input type="submit" class="btn" value="Submit" id="submitButton"></p>
+                            </form> 
+                            <h3 id="sign_up_status">{{status}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>copyright © Meeting Impossible 2018</p>
+        </div>
+
+        <script>
+            $("#submitButton").click('load', function(){
+                // setTimeout(showLoader, 1000); //wait for page load PLUS two seconds.
+                showLoader();
+            });
+            function showLoader(){
+                $( "#loadingDiv" ).fadeIn(500, function() {
+                    // fadeOut complete. Remove the loading div
+                    $( "#loadingDiv" ).show(); //makes page more lightweight 
+                });  
+            }
+        </script>
+    </body>
+</html>

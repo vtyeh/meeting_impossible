@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Meeting Impossible</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel|Comfortaa|Montserrat|Roboto|Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lekton|Orbitron|Rajdhani|Source+Code+Pro" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/styles/style.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- Loader -->
+    <div id="loadingDiv" class="text-center" style="display:none;">
+        <svg width='182px' height='182px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-ripple"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><g> <animate attributeName="opacity" dur="4s" repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1" values="1;1;0"></animate><circle cx="50" cy="50" r="40" stroke="#eeeeee" fill="none" stroke-width="2" stroke-linecap="round"><animate attributeName="r" dur="4s" repeatCount="indefinite" begin="0s" keyTimes="0;0.33;1" values="0;22;44"></animate></circle></g><g><animate attributeName="opacity" dur="4s" repeatCount="indefinite" begin="2s" keyTimes="0;0.33;1" values="1;1;0"></animate><circle cx="50" cy="50" r="40" stroke="#eeeeee" fill="none" stroke-width="2" stroke-linecap="round"><animate attributeName="r" dur="4s" repeatCount="indefinite" begin="2s" keyTimes="0;0.33;1" values="0;22;44"></animate></circle></g></svg>
+        <p id="loadingText">Please wait, identifying the individual...</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" id="myNavbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapseBar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+            <a class="navbar-brand" href="#">Meeting Impossible</a>
+            </div>
+            <div class="collapse navbar-collapse" id="collapseBar">
+              <ul class="nav navbar-nav navbar-right">
+				  <li><a href="/headquarters">Find Acquaintance</a></li>
+				  <li><a href="/voice-text-voice">Voice Recognition</a></li>
+                  <!-- <li><a href="/">Sign Up</a></li> -->
+				  <li><a href="/hatespeech">Hate Speech Recognition</a></li>
+                  <li><a href="/">Sign Up</a></li>
+              </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="register">
+        <div class="register-full">
+            <div class="register-left">
+                <div class="register-in">
+					<h1>Hate Speech Recognizer</h1>
+					<h4><strong>Toxic Comment Classifier:</strong><br/>
+						See how toxic a comment is before you say it or if it is said to you.</h4>
+					<form method="POST">
+						<textarea name="text">Type comment here.</textarea>
+						<input type="submit" class="btn-default" value="Check Toxicity" id="toxicButton">
+					</form>
+                </div>
+            </div>
+            <div class="register-right">
+                <img src="../static/styles/hatespeechv2.png" width="50%" height="auto" style="float: right;">
+				<div class="register-in">
+                    
+					<div id="toxic-display">
+						<h3><strong>Comment submitted:</strong></h3> <br />
+						<h4>{% if text %}{{result}}{% else %}No comment submitted.{% endif %} <br /></h4>
+						<hr>
+						<h3><strong>Result:</strong></br></h3>
+						
+						<h4>Toxic: <span style="font-size: 2em; color: red;">{{ pred_toxic }}</span> <br />
+						Severely toxic: {{ pred_severe_toxic }} <br />
+						Identity hate: {{ pred_identity_hate }} <br />
+						Insult: {{ pred_insult }} <br />
+						Obscene: {{ pred_obscene }} <br />
+						Threat: {{ pred_threat }} <br /></h4> 
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>copyright © Meeting Impossible 2018</p>
+    </div>
+
+    <script>
+        $("#uploadButton").click('load', function(){
+          // setTimeout(showLoader, 1000); //wait for page load PLUS two seconds.
+          showLoader();
+        });
+        function showLoader(){
+            $( "#loadingDiv" ).fadeIn(500, function() {
+              // fadeOut complete. Remove the loading div
+              $( "#loadingDiv" ).show(); //makes page more lightweight 
+          });  
+        }
+    </script>
+
+  </body>
+</html>

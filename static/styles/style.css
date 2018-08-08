@@ -1,0 +1,365 @@
+/* font-family: 'Montserrat', sans-serif;
+font-family: 'Roboto Mono', monospace;
+font-family: 'Abel', sans-serif;
+font-family: 'Comfortaa', cursive; 
+font-family: 'Roboto', sans-serif;
+
+font-family: 'Rajdhani', sans-serif;
+font-family: 'Source Code Pro', monospace;
+font-family: 'Orbitron', sans-serif;
+font-family: 'Lekton', sans-serif;*/
+
+body {
+    background: url("pink dust.png");
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+#myNavbar {
+    background: transparent;
+    border: none;
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+}
+
+#myDiv {
+    font-family: 'Lekton', sans-serif;
+}
+
+.panel {
+    border-radius: 22px;
+    width: 100%;
+    height: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    opacity: 0.9;
+    overflow: auto;
+    margin-bottom: 40px;
+}
+
+form input#name,
+form input#phone,
+form input#email,
+form input#age,
+form input#occupation,
+form input#description,
+form input#unique_id,
+.file-input{
+    border: 0;
+    font-size: 1em;
+    color: #ffffff;
+    padding: 0.5em 1em;
+    border: 0;
+    width: 90%;
+    border-bottom: 1px solid #ffffff;
+    background: none;
+    -webkit-appearance: none;
+	outline: none;
+}
+
+label {
+	opacity: 0.5;
+}
+
+/* .file-input {
+	opacity: 0;
+} */
+
+.label-special {
+	background-color: black;
+	width: 90%;
+}
+
+#uploadPhoto {
+	border: 0;
+    font-size: 0.92em;
+    color: #ffffff;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    width: 90%;
+    background: none;
+    -webkit-appearance: none;
+	outline: none;
+}
+
+#uploadButton {
+    float: right;
+    padding: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: 1.1px;
+    margin-top: 1em;
+}
+
+#toxicButton{
+	float: right;
+    padding: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: 1.1px;
+    margin-top: 1em;
+}
+
+#fileButton {
+    float: left;
+}
+
+#submitButton {
+    margin-right: 30px;
+    border-radius: 0;
+    border: 1px solid #b9b9b9;
+    background-color: #FFF;
+    color: #525252;;
+    float: left;
+    font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: 1.1px;
+}
+
+img {
+    margin-top: 15px;
+    max-width: 100%;
+    height: auto;
+}
+
+.table.borderless td,
+.borderless th {
+    border: none;
+}
+
+#mascot {
+    max-width: 75%;
+    height: auto;
+    float: right;
+}
+
+#sign_up_status {
+    color: #07d607;
+}
+
+#slogan {
+    float: right
+}
+
+#new_friend_image {
+    margin-bottom: 30px;
+}
+
+.footer {
+    font-family: 'Lekton', sans-serif;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    background-color: transparent;
+    color: #865858;
+    text-align: center;
+    opacity: 0.3;
+    font-size: 15px
+ }
+
+#loadingDiv {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding-top: 15%;
+    position: fixed;
+    display: block;
+    opacity: 0.9;
+    background-color: #fff;
+    z-index: 99;
+}
+
+#loadingText {
+    font-family: 'Nunito', sans-serif;
+    color: gray;
+    z-index: 101;
+    letter-spacing: 2px;
+}
+
+.register-full {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 3em;
+}
+.register-left {
+    background: #ffffff;
+    height: 635px;
+}
+.register-right {
+    background: #865858;;
+    height: 640px;
+    margin-bottom: 4em;
+    
+}
+.register-in {
+    padding: 3em;
+}
+.register-right, .register-left {
+    width: 50%;
+    float: left;
+}
+.register-left p {
+	font-family: 'Lekton', sans-serif;
+    margin: 2em 0;
+    font-size: 1em;
+}
+
+.register-left h1, h4, form {
+	font-family: 'Rajdhani', sans-serif;
+    margin: 2em 0;
+}
+
+.register-right h2 {
+	color: white;
+	font-family: 'Rajdhani', sans-serif;
+	font-weight: bold;
+}
+
+.register-form{
+	margin:2em 0 0 0;
+/* 	font-family: 'Comfortaa', cursive;  */
+	font-family: 'Rajdhani', sans-serif;
+}
+
+.styled-input input:focus ~ label, .styled-input input:valid ~ label,.styled-input textarea:focus ~ label ,.styled-input textarea:valid ~ label{
+    font-size: .9em;
+    color: #FFF;
+    top: -1.3em;
+    -webkit-transition: all 0.125s;
+	-moz-transition: all 0.125s; 
+	-o-transition: all 0.125s;
+	-ms-transition: all 0.125s;
+    transition: all 0.125s;
+    opacity: 1;
+}
+.styled-input {
+	width: 100%;
+    position: relative;
+    margin: 0 0 1.6em;
+}
+
+.styled-input label {
+	color: #ffffff;
+    padding: 0.5em .9em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    pointer-events: none;
+    font-weight: 400;
+    font-size: .9em;
+    display: block;
+    line-height: 1em;
+}
+
+#found-display p,
+#found-display h1, 
+#found-display h3,
+#found-display h4{
+	font-family: 'Rajdhani', sans-serif;
+	color: white;
+	margin-bottom: 0;
+}
+
+#found-display p{
+    font-size: 1.1em;
+}
+
+#toxic-display {
+    font-family: 'Rajdhani', sans-serif;
+	color: white;
+	margin-bottom: 0;
+	border: 5px solid black;
+	padding: 1em;
+}
+
+textarea {
+    font-family: 'Rajdhani', sans-serif;
+    width: 100%;
+    height: 120px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+/* voice-text-voice */
+
+.center {
+    padding: 10px;
+    text-align: center;
+}
+.final {
+    color: black;
+    padding-right: 3px; 
+}
+.interim {
+    color: gray;
+}
+.info {
+    font-size: 14px;
+    color: #777;
+    display: none;
+}
+.right {
+    float: right;
+}
+
+#headline {
+    font-weight: 300;
+}
+#info {
+    font-size: 20px;
+    color: #777;
+    visibility: hidden;
+    margin-top: 10px;
+}
+#results, textarea {
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+    min-height: 150px;
+    margin-top: 10px;
+    border-style: dashed;
+}
+#start_button {
+    border: 0;
+    background-color:transparent;
+    margin-top: 15px;
+    padding: 40px;
+    font-size: 2.5em;
+    color:#07d607;
+    cursor: pointer;
+}
+
+#start_img {
+    float: right;
+    width: 15px;
+    height: auto;
+}
+
+#translator {
+    font-family: 'Rajdhani', sans-serif;
+	color: white;
+	margin-bottom: 0;
+	padding: 1em;
+}
+
+#text {
+	background-color: #865858;
+    border-style: dashed;
+    color: white;
+}
