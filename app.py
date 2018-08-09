@@ -36,12 +36,12 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Connect to MongoDB
-mng_client = pymongo.MongoClient(DB_HOST, DB_PORT)
-db = mng_client[DB_NAME]
-db.authenticate(DB_USER, DB_PASS)
+# mng_client = pymongo.MongoClient(DB_HOST, DB_PORT)
+# db = mng_client[DB_NAME]
+# db.authenticate(DB_USER, DB_PASS)
 
-# mng_client = pymongo.MongoClient('localhost', 27017)
-# db = mng_client['app']
+mng_client = pymongo.MongoClient('localhost', 27017)
+db = mng_client['app']
 
 # Create app
 app = Flask(__name__)
@@ -105,7 +105,7 @@ def sign_up():
         new_entry["Phone"] = phone
         new_entry["Email"] = email
         new_entry["Occupation"] = occupation
-        new_entry["Age"] = age
+        # new_entry["Age"] = age
         new_entry["Description"] = description
         new_entry["Unique ID"] = unique_id
 
