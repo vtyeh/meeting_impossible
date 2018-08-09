@@ -21,9 +21,9 @@ from forms import SignUp
 # Import Dependencies for Hate Speech Recognition
 from sklearn.feature_extraction.text import TfidfVectorizer
 from utils import tokenize  # tokenizer used when training TFIDF vectorizer
-# from deepmoji.sentence_tokenizer import SentenceTokenizer
-# from deepmoji.model_def import deepmoji_emojis
-# from deepmoji.global_variables import PRETRAINED_PATH, VOCAB_PATH
+from deepmoji.sentence_tokenizer import SentenceTokenizer
+from deepmoji.model_def import deepmoji_emojis
+from deepmoji.global_variables import PRETRAINED_PATH, VOCAB_PATH
 import pickle
 import json
 import numpy as np
@@ -211,7 +211,35 @@ def acquaintence_identification(uploaded_file):
 def my_form_post():
     """ Takes the comment submitted by the user, apply TFIDF trained vectorizer to it, predict using trained models """
     if request.method == 'POST':
+        # text = request.form['text']
+
+        # comment_term_doc = tfidf_model.transform([text])
+
+        # dict_preds = {}
+
+        # dict_preds['pred_toxic'] = logistic_toxic_model.predict_proba(comment_term_doc)[:, 1][0]
+        # dict_preds['pred_severe_toxic'] = logistic_severe_toxic_model.predict_proba(comment_term_doc)[:, 1][0]
+        # dict_preds['pred_identity_hate'] = logistic_identity_hate_model.predict_proba(comment_term_doc)[:, 1][0]
+        # dict_preds['pred_insult'] = logistic_insult_model.predict_proba(comment_term_doc)[:, 1][0]
+        # dict_preds['pred_obscene'] = logistic_obscene_model.predict_proba(comment_term_doc)[:, 1][0]
+        # dict_preds['pred_threat'] = logistic_threat_model.predict_proba(comment_term_doc)[:, 1][0]
+
+        # for k in dict_preds:
+        #     perc = dict_preds[k] * 100
+        #     dict_preds[k] = "{0:.2f}%".format(perc)
+
+        # return render_template('hatespeech.html', text=text,
+        #                     pred_toxic=dict_preds['pred_toxic'],
+        #                     pred_severe_toxic=dict_preds['pred_severe_toxic'],
+        #                     pred_identity_hate=dict_preds['pred_identity_hate'],
+        #                     pred_insult=dict_preds['pred_insult'],
+        #                     pred_obscene=dict_preds['pred_obscene'],
+        #                     pred_threat=dict_preds['pred_threat'])
+
         text = request.form['text']
+        temp = []
+        temp.append(request.form['text'])
+        length = len(temp[0].split())
 
         comment_term_doc = tfidf_model.transform([text])
 
@@ -227,109 +255,81 @@ def my_form_post():
         for k in dict_preds:
             perc = dict_preds[k] * 100
             dict_preds[k] = "{0:.2f}%".format(perc)
-
-        return render_template('hatespeech.html', text=text,
+            if length > 1:
+                result = get_emoji(temp)
+                inx1 = int(result[2])
+                inx2 = int(result[3])
+                inx3 = int(result[4])
+                inx4 = int(result[5])
+                value = str(result[0])
+                emoji_result = emo[inx1]+emo[inx2]+emo[inx3]+emo[inx4]
+                print(value)
+        
+        return render_template('hatespeech.html', text=text, result=value, emoji_result=emoji_result,
                             pred_toxic=dict_preds['pred_toxic'],
                             pred_severe_toxic=dict_preds['pred_severe_toxic'],
                             pred_identity_hate=dict_preds['pred_identity_hate'],
                             pred_insult=dict_preds['pred_insult'],
                             pred_obscene=dict_preds['pred_obscene'],
                             pred_threat=dict_preds['pred_threat'])
-
-    #     text = request.form['text']
-    #     temp = []
-    #     temp.append(request.form['text'])
-    #     length = len(temp[0].split())
-
-    #     comment_term_doc = tfidf_model.transform([text])
-
-    #     dict_preds = {}
-
-    #     dict_preds['pred_toxic'] = logistic_toxic_model.predict_proba(comment_term_doc)[:, 1][0]
-    #     dict_preds['pred_severe_toxic'] = logistic_severe_toxic_model.predict_proba(comment_term_doc)[:, 1][0]
-    #     dict_preds['pred_identity_hate'] = logistic_identity_hate_model.predict_proba(comment_term_doc)[:, 1][0]
-    #     dict_preds['pred_insult'] = logistic_insult_model.predict_proba(comment_term_doc)[:, 1][0]
-    #     dict_preds['pred_obscene'] = logistic_obscene_model.predict_proba(comment_term_doc)[:, 1][0]
-    #     dict_preds['pred_threat'] = logistic_threat_model.predict_proba(comment_term_doc)[:, 1][0]
-
-    #     for k in dict_preds:
-    #         perc = dict_preds[k] * 100
-    #         dict_preds[k] = "{0:.2f}%".format(perc)
-    #         if length > 1:
-    #             result = get_emoji(temp)
-    #             inx1 = int(result[2])
-    #             inx2 = int(result[3])
-    #             inx3 = int(result[4])
-    #             inx4 = int(result[5])
-    #             value = str(result[0])
-    #             # emoji_result = emo[inx1]+emo[inx2]+emo[inx3]+emo[inx4]
-    #             print(value)
-    #      #emoji_result=emoji_result         
-    #     return render_template('hatespeech.html', text=text, result=value, 
-    #                         pred_toxic=dict_preds['pred_toxic'],
-    #                         pred_severe_toxic=dict_preds['pred_severe_toxic'],
-    #                         pred_identity_hate=dict_preds['pred_identity_hate'],
-    #                         pred_insult=dict_preds['pred_insult'],
-    #                         pred_obscene=dict_preds['pred_obscene'],
-    #                         pred_threat=dict_preds['pred_threat'])
     else:
         return render_template('hatespeech.html')
 
-# # Add emojis based on models
-# maxlen = 30
+# Add emojis based on models
+maxlen = 30
 
-# emo = ['😂', '😒', '😩', '😭', '😍',
-#        '😔', '👌', '😊', '❤', '😏',
-#        '😁', '🎶', '😳', '💯', '😴',
-#        '😌', '☺', '🙌', '💕', '😑',
-#        '😅', '🙏', '😕', '😘', '♥',
-#        '😐', '💁', '😞', '🙈', '😫',
-#        '✌', '😎', '😡', '👍', '😢',
-#        '😪', '😋', '😤', '✋', '😷',
-#        '👏', '👀', '🔫', '😣', '😈',
-#        '😓', '💔', '💓', '🎧', '🙊',
-#        '😉', '💀', '😖', '😄', '😜',
-#        '😠', '🙅', '💪', '👊', '💜',
-#        '💖', '💙', '😬', '✨']
+emo = ['😂', '😒', '😩', '😭', '😍',
+       '😔', '👌', '😊', '❤', '😏',
+       '😁', '🎶', '😳', '💯', '😴',
+       '😌', '☺', '🙌', '💕', '😑',
+       '😅', '🙏', '😕', '😘', '♥',
+       '😐', '💁', '😞', '🙈', '😫',
+       '✌', '😎', '😡', '👍', '😢',
+       '😪', '😋', '😤', '✋', '😷',
+       '👏', '👀', '🔫', '😣', '😈',
+       '😓', '💔', '💓', '🎧', '🙊',
+       '😉', '💀', '😖', '😄', '😜',
+       '😠', '🙅', '💪', '👊', '💜',
+       '💖', '💙', '😬', '✨']
 
-# def top_elements(array, k):
-#     ind = np.argpartition(array, -k)[-k:]
-#     return ind[np.argsort(array[ind])][::-1]
+def top_elements(array, k):
+    ind = np.argpartition(array, -k)[-k:]
+    return ind[np.argsort(array[ind])][::-1]
 
-# model = deepmoji_emojis(maxlen, PRETRAINED_PATH)
-# # model.summary()
-# model._make_predict_function()
+model = deepmoji_emojis(maxlen, PRETRAINED_PATH)
+# model.summary()
+model._make_predict_function()
 
-# with open(VOCAB_PATH, 'r') as f:
-#     vocabulary = json.load(f)
+with open(VOCAB_PATH, 'r') as f:
+    vocabulary = json.load(f)
 
-# st = SentenceTokenizer(vocabulary, maxlen)
+st = SentenceTokenizer(vocabulary, maxlen)
 
-# def model_predict(TEST_SENTENCES):
-#     print(TEST_SENTENCES)
-#     tokenized, _, _ = st.tokenize_sentences(TEST_SENTENCES)
-#     print (tokenized)
-#     prob = model.predict_function([tokenized])[0]
-#     return prob
+def model_predict(TEST_SENTENCES):
+    print(TEST_SENTENCES)
+    tokenized, _, _ = st.tokenize_sentences(TEST_SENTENCES)
+    print (tokenized)
+    prob = model.predict_function([tokenized])[0]
+    return prob
 
-# def get_emoji(TEST_SENTENCES):
-#     scores = []
-#     t_score = []
+def get_emoji(TEST_SENTENCES):
+    scores = []
+    t_score = []
 
-#     print (TEST_SENTENCES)
+    print (TEST_SENTENCES)
 
-#     prob = model_predict(TEST_SENTENCES)
-#     t_score.append(TEST_SENTENCES[0])
-#     t_prob = prob[0]
-#     ind_top = top_elements(t_prob, 4)
+    prob = model_predict(TEST_SENTENCES)
+    t_score.append(TEST_SENTENCES[0])
+    t_prob = prob[0]
+    ind_top = top_elements(t_prob, 4)
 
-#     t_score.append(sum(t_prob[ind_top]))
-#     t_score.extend(ind_top)
-#     t_score.extend([t_prob[ind] for ind in ind_top])
-#     scores.append(t_score)
+    t_score.append(sum(t_prob[ind_top]))
+    t_score.extend(ind_top)
+    t_score.extend([t_prob[ind] for ind in ind_top])
+    scores.append(t_score)
 
-#     print(t_score)
-#     return t_score
+    print(t_score)
+    return t_score
 
 @app.route("/voice-text-voice")
 def record():

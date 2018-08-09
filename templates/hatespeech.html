@@ -24,6 +24,12 @@
 
     <!-- Custom styles for this template -->
     <link href="../static/styles/style.css" rel="stylesheet">
+    <style>
+        .goog-te-gadget {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 19px !important;
+        }  
+    </style>
   </head>
   <body>
 
@@ -77,9 +83,9 @@
                     
 					<div id="toxic-display">
 						<h3><strong>Comment submitted:</strong></h3> <br />
-						<h4>{% if text %}{{text}}{% else %}No comment submitted.{% endif %} <br /></h4>
+						<h4>{% if text %}{{result}}{% else %}No comment submitted.{% endif %} <br /></h4>
 						<hr>
-						<h3><strong>Result:</strong> <!--{{emoji_result}}--></br></h3>
+						<h3><strong>Result:</strong> {{emoji_result}}</br></h3>
 						
 						<h4>Toxic: <span style="font-size: 2em; color: red;">{{ pred_toxic }}</span> <br />
 						Severely toxic: {{ pred_severe_toxic }} <br />
