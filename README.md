@@ -1,7 +1,7 @@
 # Meeting: Impossible
 Using an open-source face recognition library integrated with OpenCV, this Flask app aims to make exchanging contact information at meetings easier.
 
-## Problem: A hypothetical scenario
+## Problem
 Susie has to attend an international conference tonight for work. She wants to meet as many new faces as possible while creating real connections. She goes to the conference, gets to know a lot of great people, but by the end of the night, she finds that she forgot to ask for their contact information. The conversation was so amazing! She is very sad she might not be able to chat with them again.
 
 ## Solution
@@ -10,4 +10,24 @@ Before the conference, each attendee will add in their basic contact information
 ## Future Features
 - Added security i.e. login with unique conference ids
 
+## How to use:
+```
+# Clone onto your desktop
+git clone https://github.com/vtyeh/meeting_impossible.git
+
+# Go into the main directory
+cd meeting_impossible
+
+# Create a virtual environment
+virtualenv env
+
+# Activate environment
+env\Scripts\activate
+
+# Install requirements
+pip install -r requirements.txt
+
+# Run the app
+python app.py
+```
 
