@@ -75,7 +75,7 @@ def predict(x_img_path, knn_clf=None, model_path=None, distance_threshold=0.6):
 
     # If no faces are found in the image, return an empty result
     if len(x_face_locations) == 0:
-        return []
+        return False
 
     # Find encodings for faces in the test image
     faces_encodings = face_recognition.face_encodings(x_img, known_face_locations=x_face_locations)
